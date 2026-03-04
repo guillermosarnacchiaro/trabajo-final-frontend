@@ -3,13 +3,13 @@ import { createContext, useContext, useState, useEffect } from 'react'
 const ChatContext = createContext(null)
 
 const CONTACTOS = [
-  { id: 1, name: 'Gustavo Cerati', avatar: 'GC', color: '#7c3aed', status: 'online', lastMessage: 'La música es lo único que me salva', lastTime: '10:32', unread: 2 },
-  { id: 2, name: 'Charly García', avatar: 'CG', color: '#b45309', status: 'offline', lastMessage: 'No soy un extraño', lastTime: 'Ayer', unread: 0 },
-  { id: 3, name: 'Andrés Calamaro', avatar: 'AC', color: '#0369a1', status: 'online', lastMessage: 'El día de hoy es un gran día', lastTime: '09:15', unread: 3 },
-  { id: 4, name: 'Luis Alberto Spinetta', avatar: 'LS', color: '#065f46', status: 'offline', lastMessage: 'Seguí tu luz interior', lastTime: 'Lun', unread: 0 },
-  { id: 5, name: 'Fito Páez', avatar: 'FP', color: '#be123c', status: 'online', lastMessage: 'Rodando bajé mil veces', lastTime: 'Mar', unread: 1 },
-  { id: 6, name: 'Miguel Mateos', avatar: 'MM', color: '#0e7490', status: 'offline', lastMessage: 'Cuando seas grande lo vas a entender', lastTime: 'Mié', unread: 0 },
-  { id: 7, name: 'Divididos 🎸', avatar: 'DV', color: '#92400e', status: 'group', lastMessage: 'Suena el tren, suena el viento', lastTime: 'Jue', unread: 5 },
+  { id: 1, name: 'Valen', avatar: 'VG', color: '#7c3aed', status: 'online', lastMessage: 'La música es lo único que me salva', lastTime: '10:32', unread: 2 },
+  { id: 2, name: 'Martín', avatar: 'MR', color: '#b45309', status: 'offline', lastMessage: 'No soy un extraño', lastTime: 'Ayer', unread: 0 },
+  { id: 3, name: 'Sofi', avatar: 'SP', color: '#0369a1', status: 'online', lastMessage: 'El día de hoy es un gran día', lastTime: '09:15', unread: 3 },
+  { id: 4, name: 'Lucas', avatar: 'LF', color: '#065f46', status: 'offline', lastMessage: 'Seguí tu luz interior', lastTime: 'Lun', unread: 0 },
+  { id: 5, name: 'Cami', avatar: 'CS', color: '#be123c', status: 'online', lastMessage: 'Rodando bajé mil veces', lastTime: 'Mar', unread: 1 },
+  { id: 6, name: 'Flor', avatar: 'FM', color: '#0e7490', status: 'offline', lastMessage: 'Cuando seas grande lo vas a entender', lastTime: 'Mié', unread: 0 },
+  { id: 7, name: 'Marcos', avatar: 'GR', color: '#92400e', status: 'group', lastMessage: 'Suena el tren, suena el viento', lastTime: 'Jue', unread: 5 },
 ]
 
 const MENSAJES = {
@@ -68,6 +68,7 @@ export function ChatProvider({ children }) {
   const [contactos, setContactos] = useState(CONTACTOS)
   const [mensajes, setMensajes] = useState(MENSAJES)
   const [contactoActivoId, setContactoActivoId] = useState(null)
+  const [usuario, setUsuario] = useState({ name: '', phone: '' })
 
   const contactoActivo = contactos.find(c => c.id === contactoActivoId) || null
   const mensajesActivos = mensajes[contactoActivoId] || []
@@ -147,18 +148,20 @@ export function ChatProvider({ children }) {
   return () => clearInterval(intervalo)
 }, [])
 
-  return (
-    <ChatContext.Provider value={{
-      contactos,
-      contactoActivo,
-      mensajesActivos,
-      contactoActivoId,
-      seleccionarContacto,
-      enviarMensaje,
-    }}>
-      {children}
-    </ChatContext.Provider>
-  )
+return (
+  <ChatContext.Provider value={{
+    contactos,
+    contactoActivo,
+    mensajesActivos,
+    contactoActivoId,
+    usuario,
+    setUsuario,
+    seleccionarContacto,
+    enviarMensaje,
+  }}>
+    {children}
+  </ChatContext.Provider>
+)
 }
 
 export function useChat() {

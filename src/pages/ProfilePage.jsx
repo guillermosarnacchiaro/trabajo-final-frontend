@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useChat } from '../context/ChatContext'
 
 export default function ProfilePage() {
   const navigate = useNavigate()
-  const [form, setForm] = useState({ name: 'Guille', status: 'Disponible' })
+const { usuario } = useChat()
+const [form, setForm] = useState({ name: usuario.name || 'Sin nombre', status: 'Disponible' })
   const [editandoNombre, setEditandoNombre] = useState(false)
   const [editandoStatus, setEditandoStatus] = useState(false)
   const [guardado, setGuardado] = useState(false)

@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useChat } from '../context/ChatContext'
 
 export default function LoginPage() {
   const navigate = useNavigate()
+  const { setUsuario } = useChat()
   const [form, setForm] = useState({ name: '', phone: '' })
   const [errors, setErrors] = useState({})
 
@@ -17,6 +19,7 @@ export default function LoginPage() {
     if (form.name.trim().length < 2) errs.name = 'Ingresá tu nombre'
     if (form.phone.trim().length < 7) errs.phone = 'Ingresá un número válido'
     if (Object.keys(errs).length > 0) { setErrors(errs); return }
+    setUsuario({ name: form.name, phone: form.phone })
     navigate('/chat')
   }
 
