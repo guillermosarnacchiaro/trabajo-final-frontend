@@ -1,0 +1,105 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-primary);
+  padding: 1rem;
+}
+
+.card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent-light);
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.input {
+  background: var(--bg-tertiary);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+}
+
+.input:focus {
+  border-color: var(--accent);
+}
+
+.inputError {
+  border-color: var(--danger);
+}
+
+.error {
+  font-size: 0.8rem;
+  color: var(--danger);
+}
+
+.btn {
+  background: var(--accent);
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: none;
+  margin-top: 0.5rem;
+  transition: background 0.2s;
+}
+
+.btn:hover {
+  background: var(--accent-light);
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 1.5rem;
+  }
+}

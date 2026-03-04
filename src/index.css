@@ -1,0 +1,46 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-app: #f0f2f5;
+  --bg-sidebar: #ffffff;
+  --bg-chat: #efeae2;
+  --bg-header: #f0f2f5;
+  --bg-input: #ffffff;
+  --bg-hover: #f5f6f6;
+  --bg-active: #f0f2f5;
+  --bubble-sent: #d9fdd3;
+  --bubble-recv: #ffffff;
+  --accent: #00a884;
+  --accent-dark: #008069;
+  --text-primary: #111b21;
+  --text-secondary: #667781;
+  --text-muted: #8696a0;
+  --border: #e9edef;
+  --icon-color: #54656f;
+}
+
+html, body, #root {
+  height: 100%;
+  font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+  background: var(--bg-app);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+input, textarea { font-family: inherit; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #ccd0d5; border-radius: 3px; }
+
+@media (max-width: 768px) {
+  /* Sidebar ocupa toda la pantalla */
+  .sidebar-wrapper {
+    width: 100vw !important;
+  }
+}
