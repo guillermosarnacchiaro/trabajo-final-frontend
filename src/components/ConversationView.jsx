@@ -48,67 +48,66 @@ export default function ConversationView({ onVolver, esMobile }) {
       flex: 1, display: 'flex', flexDirection: 'column', height: '100vh',
     }}>
 
-      {/* Header */}
-      <div style={{
-        display: 'flex', alignItems: 'center', gap: '12px',
-        padding: '10px 16px',
-        background: 'white',
-        borderBottom: '1px solid #e9edef',
-        flexShrink: 0, height: '60px',
-      }}>
+{/* Header */}
+<div style={{
+  display: 'flex', alignItems: 'center', gap: '8px',
+  padding: '10px 16px',
+  background: 'white',
+  borderBottom: '1px solid #e9edef',
+  flexShrink: 0, height: '60px',
+}}>
 
-        <div style={{
-          width: '40px', height: '40px', borderRadius: '50%',
-          background: contactoActivo.color, display: 'flex',
-          alignItems: 'center', justifyContent: 'center',
-          fontWeight: '700', color: 'white', fontSize: '13px', flexShrink: 0,
-        }}>
+  {/* Botón volver — solo mobile */}
+  {esMobile && (
+    <button
+      onClick={onVolver}
+      style={{
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        color: '#54656f', background: 'none', border: 'none',
+        cursor: 'pointer', padding: '4px', flexShrink: 0,
+      }}
+    >
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+      </svg>
+    </button>
+  )}
 
-        {/* Botón volver — solo mobile */}
-{esMobile && (
-  <button
-    onClick={onVolver}
-    style={{
-      width: '36px', height: '36px', borderRadius: '50%',
-      display: 'flex', alignItems: 'center', justifyContent: 'center',
-      color: '#54656f', flexShrink: 0, transition: 'background 0.15s',
-    }}
-    onMouseEnter={e => e.currentTarget.style.background='#f0f2f5'}
-    onMouseLeave={e => e.currentTarget.style.background='transparent'}
-  >
-    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
-      <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
-    </svg>
-  </button>
-)}
+  <div style={{
+    width: '40px', height: '40px', borderRadius: '50%',
+    background: contactoActivo.color, display: 'flex',
+    alignItems: 'center', justifyContent: 'center',
+    fontWeight: '700', color: 'white', fontSize: '13px', flexShrink: 0,
+  }}>
+    {contactoActivo.avatar}
+  </div>
 
-          {contactoActivo.avatar}
-        </div>
-        <div style={{ flex: 1 }}>
-          <p style={{ color: '#111b21', fontWeight: '500', margin: 0, fontSize: '16px' }}>
-            {contactoActivo.name}
-          </p>
-          <p style={{ color: '#667781', margin: 0, fontSize: '12px' }}>
-            {contactoActivo.status === 'online' ? 'en línea' : 'desconectado'}
-          </p>
-        </div>
-<div style={{ display: 'flex', gap: '4px' }}>
-  <button style={{ width:'40px', height:'40px', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', color:'#54656f', transition: 'background 0.15s' }}
-    onMouseEnter={e => e.currentTarget.style.background='#F9F8F8'}
-    onMouseLeave={e => e.currentTarget.style.background='transparent'}>
-    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
-      <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-    </svg>
-  </button>
-  <button style={{ width:'40px', height:'40px', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', color:'#54656f', transition: 'background 0.15s' }}
-    onMouseEnter={e => e.currentTarget.style.background='#F9F8F8'}
-    onMouseLeave={e => e.currentTarget.style.background='transparent'}>
-    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
-      <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
-    </svg>
-  </button>
+  <div style={{ flex: 1 }}>
+    <p style={{ color: '#111b21', fontWeight: '500', margin: 0, fontSize: '16px' }}>
+      {contactoActivo.name}
+    </p>
+    <p style={{ color: '#667781', margin: 0, fontSize: '12px' }}>
+      {contactoActivo.status === 'online' ? 'en línea' : 'desconectado'}
+    </p>
+  </div>
+
+  <div style={{ display: 'flex', gap: '4px' }}>
+    <button style={{ width:'40px', height:'40px', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', color:'#54656f', transition: 'background 0.15s' }}
+      onMouseEnter={e => e.currentTarget.style.background='#f0f2f5'}
+      onMouseLeave={e => e.currentTarget.style.background='transparent'}>
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+        <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+      </svg>
+    </button>
+    <button style={{ width:'40px', height:'40px', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', color:'#54656f', transition: 'background 0.15s' }}
+      onMouseEnter={e => e.currentTarget.style.background='#f0f2f5'}
+      onMouseLeave={e => e.currentTarget.style.background='transparent'}>
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+        <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+      </svg>
+    </button>
+  </div>
 </div>
-      </div>
 
       {/* Mensajes */}
       <div style={{
