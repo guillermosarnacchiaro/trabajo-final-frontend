@@ -21,26 +21,23 @@ export default function ChatPage() {
   const { id } = useParams()
   const navigate = useNavigate()
   const esMobile = useEsMobile()
-  const [mostrarChat, setMostrarChat] = useState(false)
 
   useEffect(() => {
     if (id) {
-      seleccionarContacto(parseInt(id))
-      setMostrarChat(true)
+      seleccionarContacto(id)
     }
-  }, [id])
+  }, [id, seleccionarContacto])
 
   function handleSeleccionar(idContacto) {
     seleccionarContacto(idContacto)
     navigate(`/chat/${idContacto}`)
-    setMostrarChat(true)
   }
 
   function handleVolver() {
-    setMostrarChat(false)
     navigate('/chat')
   }
 
+  const mostrarChat = Boolean(id)
   const mostrarSidebar = !esMobile || !mostrarChat
   const mostrarConversacion = !esMobile || mostrarChat
 

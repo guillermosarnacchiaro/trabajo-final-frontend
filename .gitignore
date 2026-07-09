@@ -12,6 +12,14 @@ dist
 dist-ssr
 *.local
 
+# Backend lives in a separate repository for the final delivery
+/backend/
+
+# Local assistant/spec helper folders, not part of the frontend app
+/agent-teams-lite/
+/github/
+/openspec/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

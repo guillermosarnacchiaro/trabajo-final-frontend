@@ -4,8 +4,8 @@ import { useChat } from '../context/ChatContext'
 
 export default function ProfilePage() {
   const navigate = useNavigate()
-const { usuario } = useChat()
-const [form, setForm] = useState({ name: usuario.name || 'Sin nombre', status: 'Disponible' })
+  const { usuario } = useChat()
+  const [form, setForm] = useState({ name: usuario.name || 'Sin nombre', status: 'Disponible' })
   const [editandoNombre, setEditandoNombre] = useState(false)
   const [editandoStatus, setEditandoStatus] = useState(false)
   const [guardado, setGuardado] = useState(false)
@@ -36,13 +36,13 @@ const [form, setForm] = useState({ name: usuario.name || 'Sin nombre', status: '
     <div style={{
       display: 'flex',
       height: '100vh',
-      background: '#f0f2f5',
+      background: 'var(--bg-app)',
     }}>
 
       {/* Panel izquierdo */}
       <div style={{
         width: esMobile ? '100vw' : '420px',
-        background: 'white',
+        background: 'var(--bg-sidebar)',
         display: 'flex',
         flexDirection: 'column',
         flexShrink: 0,
@@ -50,7 +50,7 @@ const [form, setForm] = useState({ name: usuario.name || 'Sin nombre', status: '
 
         {/* Header verde */}
         <div style={{
-          background: '#00a884',
+          background: 'var(--accent)',
           padding: '28px 24px 20px',
           flexShrink: 0,
         }}>
@@ -71,12 +71,12 @@ const [form, setForm] = useState({ name: usuario.name || 'Sin nombre', status: '
         <div style={{
           display: 'flex', justifyContent: 'center',
           padding: '32px 0 24px',
-          borderBottom: '1px solid #f0f2f5',
+          borderBottom: '1px solid var(--border)',
         }}>
           <div style={{ position: 'relative' }}>
             <div style={{
               width: '120px', height: '120px', borderRadius: '50%',
-              background: '#00a884', display: 'flex',
+              background: 'var(--accent)', display: 'flex',
               alignItems: 'center', justifyContent: 'center',
               color: 'white', fontSize: '2.5rem', fontWeight: '700',
             }}>
@@ -85,7 +85,7 @@ const [form, setForm] = useState({ name: usuario.name || 'Sin nombre', status: '
             <button style={{
               position: 'absolute', bottom: '4px', right: '4px',
               width: '32px', height: '32px', borderRadius: '50%',
-              background: '#00a884', display: 'flex',
+              background: 'var(--accent)', display: 'flex',
               alignItems: 'center', justifyContent: 'center',
               border: '2px solid white', cursor: 'pointer',
             }}>
@@ -99,8 +99,8 @@ const [form, setForm] = useState({ name: usuario.name || 'Sin nombre', status: '
         <form onSubmit={handleSubmit} style={{ flex: 1 }}>
 
           {/* Nombre */}
-          <div style={{ padding: '20px 24px', borderBottom: '1px solid #f0f2f5' }}>
-            <p style={{ color: '#00a884', fontSize: '13px', fontWeight: '500', marginBottom: '8px' }}>
+          <div style={{ padding: '20px 24px', borderBottom: '1px solid var(--border)' }}>
+            <p style={{ color: 'var(--accent)', fontSize: '13px', fontWeight: '500', marginBottom: '8px' }}>
               Nombre
             </p>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -111,17 +111,17 @@ const [form, setForm] = useState({ name: usuario.name || 'Sin nombre', status: '
                   onChange={handleChange}
                   autoFocus
                   style={{
-                    flex: 1, border: 'none', borderBottom: '2px solid #00a884',
-                    fontSize: '16px', color: '#111b21', outline: 'none',
-                    padding: '4px 0', background: 'transparent',
+                    flex: 1, border: 'none', borderBottom: '2px solid var(--accent)',
+                    fontSize: '16px', color: 'var(--text-primary)', outline: 'none',
+                    padding: '4px 0', background: 'transparent', caretColor: 'var(--accent)',
                   }}
                 />
               ) : (
-                <span style={{ fontSize: '16px', color: '#111b21' }}>{form.name}</span>
+                <span style={{ fontSize: '16px', color: 'var(--text-primary)' }}>{form.name}</span>
               )}
               <button type="button" onClick={() => setEditandoNombre(!editandoNombre)} style={{
-                color: '#54656f', display: 'flex', alignItems: 'center',
-                marginLeft: '12px',
+                color: 'var(--icon-color)', display: 'flex', alignItems: 'center',
+                marginLeft: '12px', background: 'none', border: 'none', cursor: 'pointer',
               }}>
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
                   <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
@@ -131,8 +131,8 @@ const [form, setForm] = useState({ name: usuario.name || 'Sin nombre', status: '
           </div>
 
           {/* Estado */}
-          <div style={{ padding: '20px 24px', borderBottom: '1px solid #f0f2f5' }}>
-            <p style={{ color: '#00a884', fontSize: '13px', fontWeight: '500', marginBottom: '8px' }}>
+          <div style={{ padding: '20px 24px', borderBottom: '1px solid var(--border)' }}>
+            <p style={{ color: 'var(--accent)', fontSize: '13px', fontWeight: '500', marginBottom: '8px' }}>
               Info
             </p>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -143,17 +143,17 @@ const [form, setForm] = useState({ name: usuario.name || 'Sin nombre', status: '
                   onChange={handleChange}
                   autoFocus
                   style={{
-                    flex: 1, border: 'none', borderBottom: '2px solid #00a884',
-                    fontSize: '16px', color: '#111b21', outline: 'none',
-                    padding: '4px 0', background: 'transparent',
+                    flex: 1, border: 'none', borderBottom: '2px solid var(--accent)',
+                    fontSize: '16px', color: 'var(--text-primary)', outline: 'none',
+                    padding: '4px 0', background: 'transparent', caretColor: 'var(--accent)',
                   }}
                 />
               ) : (
-                <span style={{ fontSize: '16px', color: '#111b21' }}>{form.status}</span>
+                <span style={{ fontSize: '16px', color: 'var(--text-primary)' }}>{form.status}</span>
               )}
               <button type="button" onClick={() => setEditandoStatus(!editandoStatus)} style={{
-                color: '#54656f', display: 'flex', alignItems: 'center',
-                marginLeft: '12px',
+                color: 'var(--icon-color)', display: 'flex', alignItems: 'center',
+                marginLeft: '12px', background: 'none', border: 'none', cursor: 'pointer',
               }}>
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
                   <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
@@ -167,7 +167,7 @@ const [form, setForm] = useState({ name: usuario.name || 'Sin nombre', status: '
             <div style={{ padding: '16px 24px' }}>
               <button type="submit" style={{
                 width: '100%', padding: '10px',
-                background: '#00a884', border: 'none',
+                background: 'var(--accent)', border: 'none',
                 borderRadius: '24px', color: 'white',
                 fontSize: '15px', fontWeight: '600', cursor: 'pointer',
               }}>
@@ -177,7 +177,7 @@ const [form, setForm] = useState({ name: usuario.name || 'Sin nombre', status: '
           )}
 
           {guardado && (
-            <p style={{ textAlign: 'center', color: '#00a884', fontSize: '13px', padding: '8px' }}>
+            <p style={{ textAlign: 'center', color: 'var(--accent)', fontSize: '13px', padding: '8px' }}>
               ✓ Cambios guardados
             </p>
           )}
@@ -190,12 +190,12 @@ const [form, setForm] = useState({ name: usuario.name || 'Sin nombre', status: '
         <div style={{
           flex: 1, display: 'flex', flexDirection: 'column',
           alignItems: 'center', justifyContent: 'center',
-          color: '#667781', gap: '12px',
+          color: 'var(--text-secondary)', gap: '12px',
         }}>
           <svg viewBox="0 0 24 24" width="80" height="80" fill="#ccd0d5">
             <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
           </svg>
-          <p style={{ fontSize: '16px', color: '#667781' }}>Perfil</p>
+          <p style={{ fontSize: '16px', color: 'var(--text-secondary)' }}>Perfil</p>
         </div>
       )}
 

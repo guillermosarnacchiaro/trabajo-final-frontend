@@ -21,6 +21,27 @@
   --text-muted: #8696a0;
   --border: #e9edef;
   --icon-color: #54656f;
+  --placeholder: #8696a0;
+}
+
+:root[data-theme="dark"] {
+  --bg-app: #1a1a1a;
+  --bg-sidebar: #2d2d2d;
+  --bg-chat: #111111;
+  --bg-header: #1a1a1a;
+  --bg-input: #2d2d2d;
+  --bg-hover: #3d3d3d;
+  --bg-active: #4d4d4d;
+  --bubble-sent: #056162;
+  --bubble-recv: #2d2d2d;
+  --accent: #00a884;
+  --accent-dark: #006b54;
+  --text-primary: #f5f5f5;
+  --text-secondary: #c0c0c0;
+  --text-muted: #a0a0a0;
+  --border: #404040;
+  --icon-color: #a0a0a0;
+  --placeholder: #707070;
 }
 
 html, body, #root {
@@ -33,6 +54,30 @@ html, body, #root {
 
 button { font-family: inherit; cursor: pointer; border: none; background: none; }
 input, textarea { font-family: inherit; }
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--placeholder);
+  opacity: 1;
+}
+
+input::-webkit-input-placeholder {
+  color: var(--placeholder);
+}
+
+input:-moz-placeholder {
+  color: var(--placeholder);
+  opacity: 1;
+}
+
+input::-moz-placeholder {
+  color: var(--placeholder);
+  opacity: 1;
+}
+
+input:-ms-input-placeholder {
+  color: var(--placeholder);
+}
 
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
