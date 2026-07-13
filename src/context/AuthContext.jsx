@@ -38,13 +38,17 @@ export function AuthProvider({ children }) {
     return authApi.register(payload)
   }
 
+  async function resendVerification(email) {
+    return authApi.resendVerification({ email })
+  }
+
   function logout() {
     clearToken()
     setUser(null)
   }
 
   return (
-    <AuthContext.Provider value={{ user, loading, isAuthenticated: !!user, login, register, logout }}>
+    <AuthContext.Provider value={{ user, loading, isAuthenticated: !!user, login, register, resendVerification, logout }}>
       {children}
     </AuthContext.Provider>
   )

@@ -50,6 +50,18 @@ export const authApi = {
     body: JSON.stringify(payload),
   }),
   verifyEmail: (token) => apiRequest(`/auth/verify-email/${token}`),
+  resendVerification: (payload) => apiRequest('/auth/resend-verification', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  }),
+  forgotPassword: (payload) => apiRequest('/auth/forgot-password', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  }),
+  resetPassword: (payload) => apiRequest('/auth/reset-password', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  }),
   me: () => apiRequest('/users/me'),
 }
 

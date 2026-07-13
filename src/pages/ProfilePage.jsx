@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 import { useChat } from '../context/ChatContext'
 
 export default function ProfilePage() {
   const navigate = useNavigate()
+  const { logout } = useAuth()
   const { usuario } = useChat()
   const [form, setForm] = useState({ name: usuario.name || 'Sin nombre', status: 'Disponible' })
   const [editandoNombre, setEditandoNombre] = useState(false)
@@ -30,6 +32,11 @@ export default function ProfilePage() {
     setEditandoStatus(false)
     setGuardado(true)
     setTimeout(() => setGuardado(false), 2000)
+  }
+
+  function handleLogout() {
+    logout()
+    navigate('/', { replace: true })
   }
 
   return (
@@ -96,7 +103,7 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} style={{ flex: 1 }}>
+        <form onSubmit={handleSubmit} style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
 
           {/* Nombre */}
           <div style={{ padding: '20px 24px', borderBottom: '1px solid var(--border)' }}>
@@ -181,6 +188,36 @@ export default function ProfilePage() {
               ✓ Cambios guardados
             </p>
           )}
+
+          <div style={{ marginTop: 'auto', borderTop: '1px solid var(--border)' }}>
+            <button
+              type="button"
+              onClick={handleLogout}
+              style={{
+                width: '100%',
+                minHeight: '64px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '24px',
+                padding: '0 32px',
+                color: '#e60023',
+                background: 'var(--bg-sidebar)',
+                border: 'none',
+                borderBottom: '1px solid var(--border)',
+                fontSize: '16px',
+                fontWeight: 400,
+                cursor: 'pointer',
+                textAlign: 'left',
+              }}
+            >
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                <path d="M16 17l5-5-5-5" />
+                <path d="M21 12H9" />
+              </svg>
+              <span>Cerrar sesión</span>
+            </button>
+          </div>
 
         </form>
       </div>
