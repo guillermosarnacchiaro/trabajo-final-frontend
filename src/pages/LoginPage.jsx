@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useTheme } from '../context/ThemeContext'
 
 export default function LoginPage() {
   const navigate = useNavigate()
-  const { isAuthenticated, login, register } = useAuth()
+  const { isAuthenticated, login, register, resendVerification } = useAuth()
   const { theme, setTheme } = useTheme()
   const [mode, setMode] = useState('login')
   const [form, setForm] = useState({
@@ -17,6 +17,7 @@ export default function LoginPage() {
   const [info, setInfo] = useState('')
   const [verificationUrl, setVerificationUrl] = useState('')
   const [loading, setLoading] = useState(false)
+  const [resending, setResending] = useState(false)
 
   useEffect(() => {
     if (theme !== 'light') {
@@ -32,6 +33,7 @@ export default function LoginPage() {
     setForm({ ...form, [e.target.name]: e.target.value })
     setError('')
     setInfo('')
+    setVerificationUrl('')
   }
 
   async function handleSubmit(e) {
@@ -48,7 +50,10 @@ export default function LoginPage() {
           email: form.email.trim(),
           password: form.password,
         })
-        setInfo('Cuenta creada. Verifica el email antes de iniciar sesion.')
+        setInfo(data.verificationUrl
+          ? 'Cuenta creada. En modo local usa el link de verificacion de abajo.'
+          : 'Cuenta creada. Verifica el email antes de iniciar sesion.'
+        )
         setVerificationUrl(data.verificationUrl || '')
         setMode('login')
         return
@@ -62,6 +67,28 @@ export default function LoginPage() {
       setLoading(false)
     }
   }
+
+  async function handleResendVerification() {
+    setResending(true)
+    setError('')
+    setInfo('')
+    setVerificationUrl('')
+
+    try {
+      const data = await resendVerification(form.email.trim())
+      setInfo(data.verificationUrl
+        ? 'Correo reenviado. En modo local usa el link de verificacion de abajo.'
+        : 'Correo de verificacion reenviado. Revisa tu casilla.'
+      )
+      setVerificationUrl(data.verificationUrl || '')
+    } catch (error) {
+      setError(error.message)
+    } finally {
+      setResending(false)
+    }
+  }
+
+  const canResendVerification = mode === 'register' && error.toLowerCase().includes('ya existe')
 
   return (
     <div style={{
@@ -148,7 +175,47 @@ export default function LoginPage() {
               required
             />
 
-            {error && <p style={{ color: '#f15c6d', fontSize: '0.82rem', textAlign: 'center' }}>{error}</p>}
+            {mode === 'login' && (
+              <Link
+                to="/forgot-password"
+                style={{
+                  alignSelf: 'center',
+                  color: 'var(--accent)',
+                  fontSize: '0.85rem',
+                  textDecoration: 'none',
+                }}
+              >
+                ¿Olvidaste tu contraseña?
+              </Link>
+            )}
+
+            {error && (
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+                <p style={{ color: '#f15c6d', fontSize: '0.82rem', textAlign: 'center', margin: 0 }}>{error}</p>
+                {canResendVerification && (
+                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.82rem', textAlign: 'center', margin: 0 }}>
+                    No recibiste tu correo?{' '}
+                    <button
+                      type="button"
+                      onClick={handleResendVerification}
+                      disabled={resending}
+                      style={{
+                        color: 'var(--accent)',
+                        background: 'none',
+                        border: 'none',
+                        fontSize: '0.82rem',
+                        fontWeight: 700,
+                        cursor: resending ? 'default' : 'pointer',
+                        opacity: resending ? 0.7 : 1,
+                        padding: 0,
+                      }}
+                    >
+                      {resending ? 'Reenviando...' : 'Reenviar'}
+                    </button>
+                  </p>
+                )}
+              </div>
+            )}
             {info && <p style={{ color: 'var(--accent)', fontSize: '0.82rem', textAlign: 'center' }}>{info}</p>}
             {verificationUrl && (
               <a href={verificationUrl} target="_blank" rel="noreferrer" style={{ color: 'var(--accent)', fontSize: '0.82rem', textAlign: 'center' }}>

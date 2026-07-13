@@ -14,6 +14,8 @@ Frontend React + Vite para el Trabajo Integrador Final Full-Stack. La app consum
 
 - Registro y login de usuarios.
 - Pantalla de verificacion de email (`/verify-email/:token`).
+- Reenvio del correo de verificacion si el email ya fue registrado.
+- Recuperacion de password por correo con pantalla de cambio.
 - Rutas protegidas para usuarios autenticados.
 - Listado de chats/contactos.
 - Crear, editar y borrar contactos.
@@ -65,6 +67,8 @@ npm run preview
 ```txt
 /                       Login / registro
 /verify-email/:token    Verificacion de email
+/forgot-password        Solicitar cambio de password
+/reset-password/:token  Guardar nueva password
 /chat                   Listado de chats
 /chat/:id               Detalle de chat
 /profile                Perfil
